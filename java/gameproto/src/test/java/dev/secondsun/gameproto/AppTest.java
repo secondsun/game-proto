@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import dev.secondsun.gameproto.structs.Camera;
+import dev.secondsun.gameproto.structs.Matrix4;
+import dev.secondsun.gameproto.structs.Vector3;
 import dev.secondsun.gameproto.util.Math;
 
 /**
@@ -15,6 +18,14 @@ public class AppTest {
     public void pass() {
         Assertions.fail("Pick up reading https://www.geertarien.com/blog/2017/07/30/breakdown-of-the-lookAt-function-in-OpenGL/");
     }
+
+
+@Test
+public void testGsuLookAt() {
+    var camera = new Camera(Vector3.of(0.0,0.0,0.0), Vector3.of(0.0,0.0,20.0), Vector3.of(0.0,1.0,0.0));
+    Matrix4 matrix = camera.lookAtMatrix();
+
+}
 
     @Test
     public void fixedPointSquareRoot88() {
@@ -29,7 +40,8 @@ public class AppTest {
 
     q = Math.sqrt88((short) 0x48cf);
     assertEquals(0x0888, q);
-
+    q = Math.sqrt88((short) 0x400);
+    assertEquals(0x200, q);
 }
 
 @Test
@@ -42,6 +54,16 @@ public void testTo88() {
     assertEquals(0x7D1f, Math.to88Fixedpoint(125.123));
     assertEquals(0x48cf, Math.to88Fixedpoint(72.81));
 
+}
+
+@Test
+public void testReciprocol() {
+    assertEquals(0x02, Math.reciprocol( 128));
+    assertEquals(0x03, Math.reciprocol( 80));
+    assertEquals(0x4, Math.reciprocol((short) 64));
+    assertEquals(0x10, Math.reciprocol((short) 16));
+    assertEquals(0x20, Math.reciprocol((short) 8));
+    
 }
 
 }
