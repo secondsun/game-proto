@@ -2,6 +2,8 @@ package dev.secondsun.gameproto.util;
 
 import java.math.BigDecimal;
 
+import dev.secondsun.gameproto.structs.Vector3;
+
 public final class Math {
     private Math() {}
 
@@ -85,6 +87,15 @@ public final class Math {
 
     public static short to88Fixedpoint(double in) {
         return (short)((int)(in * 256 ) &  0x0FFFF);
+    }
+
+    public static Vector3 normalize(Vector3 in) {
+        double len = in.length();
+        return Vector3.of(in.x()/len, in.y()/len, in.z()/len);
+    }
+
+    public static double dot(Vector3 a, Vector3 b) {
+        return a.x()*b.x()+a.y()*b.y()+a.z()*b.z();
     }
 
 }

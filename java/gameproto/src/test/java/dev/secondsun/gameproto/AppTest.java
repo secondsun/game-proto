@@ -16,14 +16,28 @@ import dev.secondsun.gameproto.util.Math;
 public class AppTest {
     @Test
     public void pass() {
-        Assertions.fail("Pick up reading https://www.geertarien.com/blog/2017/07/30/breakdown-of-the-lookAt-function-in-OpenGL/");
+        //Assertions.fail("Pick up reading https://www.geertarien.com/blog/2017/07/30/breakdown-of-the-lookAt-function-in-OpenGL/");
     }
 
 
 @Test
 public void testGsuLookAt() {
-    var camera = new Camera(Vector3.of(0.0,0.0,0.0), Vector3.of(0.0,0.0,20.0), Vector3.of(0.0,1.0,0.0));
+    var camera = new Camera(Vector3.of(0.0,0.0,0.0), Vector3.of(-1.5,0.0,-1.5), Vector3.of(0.0,1.0,0.0));
     Matrix4 matrix = camera.lookAtMatrix();
+    assertEquals(0.7071067811865476, matrix.a().x());
+    assertEquals(1.0000000000000002, matrix.b().y());
+    assertEquals(-0.7071067811865476, matrix.a().z());
+    assertEquals(0.7071067811865476, matrix.c().x());
+    assertEquals(0.7071067811865476, matrix.c().z());
+
+
+    camera = new Camera(Vector3.of(0.0,0.0,0.0), Vector3.of(-1.0,0.0,-1.5), Vector3.of(0.0,1.0,0.0));
+    matrix = camera.lookAtMatrix();
+    assertEquals(0.8320502943378437, matrix.a().x());
+    assertEquals(1.0, matrix.b().y());
+    assertEquals(-0.5547001962252291, matrix.a().z());
+    assertEquals(0.5547001962252291, matrix.c().x());
+    assertEquals(0.8320502943378437, matrix.c().z());
 
 }
 
